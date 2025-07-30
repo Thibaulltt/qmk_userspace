@@ -15,13 +15,14 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keymap_french_afnor.h"
 
 enum layers{
   MAC_BASE,
   MAC_FN,
   WIN_BASE,
   WIN_FN,
-  FN1,
+  USR_FN1,
 };
 
 // clang-format off
@@ -61,6 +62,20 @@ enum layers{
  */
 // clang-format on
 
+/*
+#define FR_EACU KC_2    // é
+#define FR_EGRV KC_3    // è
+#define FR_ECIR KC_4    // ê
+#define FR_LPRN KC_5    // (
+#define FR_RPRN KC_6    // )
+#define FR_LSQU KC_7    // ‘
+#define FR_RSQU KC_8    // ’
+#define FR_LDAQ KC_9    // «
+#define FR_RDAQ KC_0    // »
+#define FR_QUOT KC_MINS // '
+#define FR_DCIR KC_EQL  // ^ (dead)
+
+*/
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_106_iso(
@@ -79,12 +94,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,            _______,             _______,  _______,            _______,            _______,  _______,            _______,            _______,  _______,            _______,  _______,  _______),
     [WIN_BASE] = LAYOUT_106_iso(
         KC_MUTE,  _______,  _______,  _______,   KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             RGB_MOD,
-        KC_NUM,   KC_PSLS,  KC_PAST,  KC_PMNS,   KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
-        KC_P7,    KC_P8,    KC_P9,    KC_PPLS,   KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,                      KC_PGDN,
-        KC_P4,    KC_P5,    KC_P6,               KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,               KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,  KC_NUHS,  KC_ENT,   KC_HOME,
-        KC_P1,    KC_P2,    KC_P3,    KC_PENT,   KC_LSFT,  KC_NUBS,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT,  KC_UP,
+        KC_NUM,   KC_PSLS,  KC_PAST,  KC_PMNS,   FR_AT,    FR_AGRV,  FR_EACU,  FR_EGRV,  FR_ECIR,  FR_LPRN,  FR_RPRN,  FR_LSQU,  FR_RSQU,  FR_LDAQ,  FR_RDAQ,  FR_QUOT,  FR_DCIR,  KC_BSPC,            KC_PGUP,
+        KC_P7,    KC_P8,    KC_P9,    KC_PPLS,   KC_TAB,   FR_A,     FR_Z,     FR_E,     FR_R,     FR_T,     FR_Y,     FR_U,     FR_I,     FR_O,     FR_P,     FR_MINS,  FR_PLUS,                      KC_PGDN,
+        KC_P4,    KC_P5,    KC_P6,               KC_CAPS,  FR_Q,     FR_S,     FR_D,     FR_F,     FR_G,               FR_H,     FR_J,     FR_K,     FR_L,     FR_M,     FR_SLSH,  FR_ASTR,  KC_ENT,   KC_HOME,
+        KC_P1,    KC_P2,    KC_P3,    KC_PENT,   KC_LSFT,  KC_NUBS,  FR_Z,     FR_X,     FR_C,     FR_V,     FR_B,     FR_B,     FR_N,     FR_DOT,   FR_COMM,  FR_COLN,  FR_SCLN,  KC_RSFT,  KC_UP,
         KC_P0,              KC_PDOT,             KC_LCTL,  KC_LWIN,            KC_LALT,  KC_SPC,   MO(WIN_FN),                   KC_SPC,             KC_RALT,  KC_RCTL,            KC_LEFT,  KC_DOWN,  KC_RGHT),
     [WIN_FN] = LAYOUT_106_iso(
+        RGB_TOG,  _______,  _______,  _______,   _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT, KC_MUTE,  KC_VOLD,   KC_VOLU,  _______,            RGB_TOG,
+        _______,  _______,  _______,  _______,   _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______, _______,  _______,   _______,  _______,            _______,
+        _______,  _______,  _______,  _______,   RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______, _______,  _______,   _______,                      _______,
+        _______,  _______,  _______,             _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,            _______,  _______,  _______, _______,  _______,   _______,  _______,  _______,  _______,
+        _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,  BAT_LVL,  BAT_LVL,  NK_TOGG,  _______, _______,  _______,   _______,  _______,  _______,
+        _______,            _______,             _______,  _______,            _______,            _______,  _______,            _______,           _______,  _______,             _______,  _______,  _______),
+    [USR_FN1] = LAYOUT_106_iso(
         RGB_TOG,  _______,  _______,  _______,   _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT, KC_MUTE,  KC_VOLD,   KC_VOLU,  _______,            RGB_TOG,
         _______,  _______,  _______,  _______,   _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______, _______,  _______,   _______,  _______,            _______,
         _______,  _______,  _______,  _______,   RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______, _______,  _______,   _______,                      _______,
@@ -99,5 +121,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [MAC_FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
     [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [WIN_FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
+    [USR_FN1]  = {ENCODER_CCW_CW(KC_BRID, KC_BRIU)},
 };
 #endif // ENCODER_MAP_ENABLE
